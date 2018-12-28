@@ -1,35 +1,35 @@
+#
+# Cookbook:: grafana
+# Spec:: default
+#
+# Copyright:: 2018, The Authors, All Rights Reserved.
+
 require 'spec_helper'
 
-describe 'default recipe on Ubuntu 14.04' do
-  let(:chef_run) do
-    ChefSpec::ServerRunner.new do |node|
-      node.automatic[:lsb][:codename] = 'trusty'
-    end.converge('chef-grafana::default')
-  end
+describe 'grafana::default' do
+  context 'When all attributes are default, on Ubuntu 16.04' do
+    let(:chef_run) do
+      # for a complete list of available platforms and versions see:
+      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
+      runner.converge(described_recipe)
+    end
 
-  let(:chef_run_versioned) do
-    ChefSpec::ServerRunner.new do |node|
-      node.automatic['chef-grafana']['install']['version'] = '4.5.0'
-    end.converge('chef-grafana::default')
-  end
-
-  context 'latest version' do
     it 'converges successfully' do
-      expect { :chef_run }.to_not raise_error
-    end
-
-    it 'upgrades successfully' do
-      expect(chef_run).to upgrade_package('grafana')
+      expect { chef_run }.to_not raise_error
     end
   end
 
-  context 'specific version' do
-    it 'converges successfully' do
-      expect { :chef_run_versioned }.to_not raise_error
+  context 'When all attributes are default, on CentOS 7.4.1708' do
+    let(:chef_run) do
+      # for a complete list of available platforms and versions see:
+      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
+      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.4.1708')
+      runner.converge(described_recipe)
     end
 
-    it 'installs successfully' do
-      expect(chef_run_versioned).to install_package('grafana').with(version: '4.5.0')
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
     end
   end
 end

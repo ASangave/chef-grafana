@@ -1,18 +1,11 @@
-chef-grafana Cookbook CHANGELOG
-===============================
+# grafana CHANGELOG
 
-## 0.5.0 (2018-01-04)
+This file is used to list changes made in each version of the grafana cookbook.
 
-* Add channel option to repositories allowing installation of beta versions of grafana.
-* Add ability to install a specific version of grafana.
+# 0.1.0
 
-## 0.4.0 (2017-07-13)
+Initial release.
 
-* Remove default_dashboards recipe, which replaced the default dashboard with
-  an old and broken one.
-
-## 0.3.0 (2017-04-01)
-
-* Add support for rhel platforms.
-
+- change 0
+- change 1
 

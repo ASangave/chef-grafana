@@ -1,20 +1,26 @@
+---
 driver:
   name: vagrant
 
 provisioner:
   name: chef_zero
-  deprecations_as_errors: true
+  # You may wish to disable always updating cookbooks in CI or other testing environments.
+  # For example:
+  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: ubuntu-14.04
-    run_list: apt::default
   - name: ubuntu-16.04
-    run_list: apt::default
-  - name: centos-6
   - name: centos-7
 
 suites:
   - name: default
     run_list:
-      - recipe[chef-grafana::default]
+      - recipe[grafana::default]
+    verifier:
+      inspec_tests:
+        - test/integration/default
     attributes:

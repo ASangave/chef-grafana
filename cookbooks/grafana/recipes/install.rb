@@ -1,4 +1,4 @@
-# Cookbook Name:: chef-grafana
+# Cookbook Name:: grafana
 # Recipe:: default
 
 case node['platform_family']
@@ -8,7 +8,7 @@ when 'debian'
   package 'apt-transport-https'
 
   apt_repository 'grafana' do
-    uri "https://packagecloud.io/grafana/#{node['chef-grafana']['install']['channel']}/debian/"
+    uri "https://packagecloud.io/grafana/#{node['grafana']['install']['channel']}/debian/"
     distribution 'wheezy' # This is used for all debian/ubuntu versions
     key 'https://packagecloud.io/gpg.key'
     components ['main']
@@ -16,8 +16,8 @@ when 'debian'
   end
 when 'rhel'
   yum_repository 'grafana' do
-    description "Grafana - #{node['chef-grafana']['install']['channel']}"
-    baseurl "https://packagecloud.io/grafana/#{node['chef-grafana']['install']['channel']}/el/#{node['platform_version'].to_i}/$basearch"
+    description "Grafana - #{node['grafana']['install']['channel']}"
+    baseurl "https://packagecloud.io/grafana/#{node['grafana']['install']['channel']}/el/#{node['platform_version'].to_i}/$basearch"
     enabled true
     gpgcheck true
     gpgkey 'https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana'
@@ -27,9 +27,9 @@ when 'rhel'
 end
 
 package 'grafana' do
-  if node['chef-grafana']['install']['version']
+  if node['grafana']['install']['version']
     action :install
-    version node['chef-grafana']['install']['version']
+    version node['grafana']['install']['version']
   else
     action :upgrade
   end

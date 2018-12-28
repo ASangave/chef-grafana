@@ -1,2 +1,2 @@
-include_recipe 'chef-grafana::install'
-include_recipe 'chef-grafana::configure'
+include_recipe 'grafana::install'
+include_recipe 'grafana::configure'

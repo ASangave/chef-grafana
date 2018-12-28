@@ -20,3 +20,15 @@ directory node['grafana']['config']['paths']['logs'] do
   mode '0755'
   recursive true
 end
+
+grafana_datasource 'influxdb-test' do
+  datasource(
+    name: 'influxdb test',
+    type: 'influxdb_08',
+    url: 'http://127.0.0.1:8086',
+    access: 'proxy',
+    database: 'collectd_db',
+    isdefault: true
+  )
+  action :create
+end

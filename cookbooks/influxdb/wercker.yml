@@ -1,0 +1,7 @@
+box: chef/chefdk
+build:
+  steps:
+    - script:
+        name: lint style spec
+        code: |
+          chef exec "rake test:quick"
